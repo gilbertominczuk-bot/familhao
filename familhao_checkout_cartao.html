@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -242,7 +243,9 @@ form{padding:4px 16px 16px;display:flex;flex-direction:column;gap:13px}
 
   // ---- send result to the flow AND ask the host to close the webview ----
   // returnUrl (optional): Blip can pass ?returnUrl= to redirect back / deep-link to WhatsApp on close.
-  var returnUrl=q.get('returnUrl');
+  // Fallback: if no returnUrl is provided, return to WhatsApp with a success message.
+  var DEFAULT_RETURN='https://wa.me/5511911660638?text=Pagamento%20conclu%C3%ADdo%20com%20sucesso!';
+  var returnUrl=q.get('returnUrl')||DEFAULT_RETURN;
   function sendToHost(payload){
     var json=JSON.stringify(payload);
     // 1) Standard webview <-> parent bridge (Blip Chat / iframe host)
